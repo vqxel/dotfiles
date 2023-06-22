@@ -5,11 +5,15 @@ These are only tested on MacOS. They are built for the zsh shell and primarily f
 ## Getting started
 
 Clone this folder in your home directory and move into it.
+
 `git clone https://github.com/Codehc/dotfiles.git && cd dotfiles`
 
 Make the install script executable.
+
 `chmod +x install.sh`
 
 Run the install script.
+
 `./install.sh`
+
 You should now be good to go.
