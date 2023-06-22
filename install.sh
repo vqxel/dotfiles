@@ -4,7 +4,7 @@
 which -s brew
 if [[ $? != 0 ]] ; then
   # Install Homebrew
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+#  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
   brew update
 fi
@@ -19,7 +19,7 @@ brew install nvm
 brew install vim
 
 # Configure ZSH and Vim
-cat ./.zshrc >> ~/.zshrc
-cat ./vimconfig.vim >> ~/.vimrc
+cat ./zshConfig/zshrc >> ~/.zshrc
+cat ./vimConfig/vimconfig.vim >> ~/.vimrc
 
 vim +PluginInstall +qall

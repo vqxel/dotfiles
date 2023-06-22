@@ -1,4 +1,4 @@
 # All environment variables, aliases, etc. are handled in my organized dotfiles.
-for file in ~/dotfiles/*.dotfile; do
+for file in ~/dotfiles/zshConfig/*.sh; do
   source "$file"
 done
