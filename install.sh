@@ -18,6 +18,8 @@ brew install imagemagick
 brew install nvm
 brew install vim
 
+nvm install node
+
 # Configure ZSH and Vim
 cat ./zshConfig/zshrc >> ~/.zshrc
 cat ./vimConfig/vimconfig.vim >> ~/.vimrc
