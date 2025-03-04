@@ -1,5 +1,5 @@
 
-export JAVA_HOME=$(/usr/libexec/java_home -v17.0.3)
+export JAVA_HOME=$(/usr/libexec/java_home -v22.0.2)
 #export JAVA_HOME=$(/usr/libexec/java_home -v11.0.15)
 export M2_HOME="/Users/mine215/localpath/apache-maven-3.6.3"
 PATH="${M2_HOME}/bin:${PATH}"
@@ -9,3 +9,8 @@ export PATH="${PATH}:${HOME}/bin"
 export NVM_DIR="$HOME/.nvm"
   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+  # From nrfutil completion install
+[[ -r "${HOME}/.nrfutil/share/nrfutil-completion/scripts/zsh/setup.zsh" ]] && . "${HOME}/.nrfutil/share/nrfutil-completion/scripts/zsh/setup.zsh"
+
+export DISPLAY=:0
