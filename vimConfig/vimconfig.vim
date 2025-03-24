@@ -55,6 +55,10 @@ call plug#begin()
   Plug 'maxmellon/vim-jsx-pretty'
 call plug#end()
 
+set background=dark
+
+let g:gruvbox_termcolors=16
+
 color gruvbox
 
 autocmd VimEnter * nmap <TAB> :NERDTreeToggle<CR>
