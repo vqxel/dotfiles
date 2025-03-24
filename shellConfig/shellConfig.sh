@@ -1,6 +1,6 @@
-if [ -n ${ZSH_VERSION} ]; then
+if [ -n "${ZSH_VERSION}" ]; then
   SHELL_NAME="zsh"
-elif [ -n ${BASH_VERSION} ]; then
+elif [ -n "${BASH_VERSION}" ]; then
   SHELL_NAME="bash"
 else
   echo "Shell doesn't seem to be ZSH or BASH (neither $ZSH_VERSION nor $BASH_VERSION exist). These dotfiles do not run in other shells."
