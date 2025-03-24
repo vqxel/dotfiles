@@ -1,27 +1,11 @@
-#!/bin/zsh
+#!/bin/sh
 
-# Install Homebrew
-which -s brew
-if [[ $? != 0 ]] ; then
-  # Install Homebrew
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-else
-  brew update
-fi
+source ${HOME}/dotfiles/installers/$(uname).sh
 
-# Install Homebrew formulae needed
-brew install cmake
-brew install gcc
-brew install latexindent
-brew install python
-brew install imagemagick
-brew install nvm
-brew install vim
+source ${HOME}/dotfiles/shellConfig/shellConfig.sh
 
-nvm install node
+# Configure shell and Vim
+ln -sf ${HOME}/dotfiles/shellConfig/shellConfig.sh ${HOME}/.${SHELL_NAME}rc
+ln -sf ${HOME}/dotfiles/vimConfig/vimconfig.vim ${HOME}/.vimrc
 
-# Configure ZSH and Vim
-cat ./zshConfig/zshrc >> ~/.zshrc
-cat ./vimConfig/vimconfig.vim >> ~/.vimrc
-
-vim -s vimConfig/vimCommands.com
+vim -s ${HOME}/dotfiles/vimConfig/vimCommands.com
