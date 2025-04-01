@@ -42,7 +42,7 @@ call plug#begin()
 " This is where we will add plugins to install
   Plug 'morhetz/gruvbox'
   Plug 'HerringtonDarkholme/yats.vim'
-  if v:version >= 801
+  if v:version >= 901
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
   endif
   Plug 'preservim/nerdtree'
@@ -87,7 +87,7 @@ let g:gitgutter_sign_modified_removed = '-'
 
 let g:airline_powerline_fonts = 1
 
-if v:version >= 801
+if v:version >= 901
   " CoC Config
   " May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
   " utf-8 byte sequence
