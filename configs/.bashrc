@@ -19,7 +19,7 @@ if [ -d "$BASH_CONFIG_DIR" ]; then
       . "$file"
     fi
     
-  done < <(find "$BASH_CONFIG_DIR" -type f -print0)
+  done < <(find -L "$BASH_CONFIG_DIR" -type f -print0)
 fi
 # --- End of recursive source ---
 
