@@ -7,6 +7,9 @@ alias ll='eza -al --icons=always'
 alias lt='eza -a --tree --level=1 --icons=always'
 alias shutdown='systemctl poweroff'
 
+alias desktop='cd /usr/share/applications'
+alias sdesktop='cd ~/.local/share/applications'
+
 eval "$(oh-my-posh init bash --config ~/.config/ohmyposh/custom.omp.json)"
 
 # --- Terminal CWD Tracking for Hyprland ---
