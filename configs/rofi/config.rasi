@@ -1,0 +1,6 @@
+configuration {
+  modi: "drun,ssh";
+  /* ... other settings ... */
+}
+
+@theme "themes/custom.rasi"

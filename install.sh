@@ -1,7 +1,4 @@
 #!/bin/bash
-
-# NOTICE: This install script was made with the help of Gemini
-
 set -e
 
 # --- Configuration ---
@@ -14,7 +11,27 @@ SOURCE_DIR="$SCRIPT_DIR/configs"
 # Set the destination directory (uses $XDG_CONFIG_HOME if set, otherwise defaults to $HOME/.config)
 DEST_DIR="${XDG_CONFIG_HOME:-$HOME/.config}"
 
+# --- New: Make scripts executable ---
+echo "---"
+echo "Making scripts executable..."
+
+APPS_DIR="$SCRIPT_DIR/apps"
+SCRIPTS_DIR="$SCRIPT_DIR/scripts"
+DIRS_TO_CHMOD=("$APPS_DIR" "$SCRIPTS_DIR")
+
+for dir in "${DIRS_TO_CHMOD[@]}"; do
+  if [ -d "$dir" ]; then
+    echo "Processing $dir..."
+    # Find all files in the directory and make them executable
+    # Using -exec ... {} + is efficient and safe for filenames
+    find "$dir" -type f -exec chmod +x {} +
+  else
+    echo "WARNING: $dir not found. Skipping."
+  fi
+done
+
 # --- Main Script ---
+echo "---"
 echo "Starting config installation..."
 echo "Source:      $SOURCE_DIR"
 echo "Destination: $DEST_DIR"
@@ -59,26 +76,39 @@ else
 fi
 
 echo "---"
-echo "Starting symlinking for other configs..."
+echo "Starting symlinking for other configs (directories and files)..."
 
-# Find all directories in $SOURCE_DIR and loop through them
+# Find all files AND directories in $SOURCE_DIR and loop through them
 # We use -maxdepth 1 so we only get the immediate children of 'configs'
 # We also add -not -name .bashrc to exclude it from this loop
-find "$SOURCE_DIR" -maxdepth 1 -mindepth 1 -type d -not -name ".bashrc" | while read -r dir_path; do
+find "$SOURCE_DIR" -maxdepth 1 -mindepth 1 -not -name ".bashrc" | while read -r config_path; do
   
-  # Get just the directory name (e.g., "nvim", "alacritty")
-  config_name=$(basename "$dir_path")
+  # Get just the config name (e.g., "nvim", "alacritty", "hyprland.conf")
+  config_name=$(basename "$config_path")
   
   # Define the full path for the new symlink
   dest_path="$DEST_DIR/$config_name"
+
+  # --- Special handling for hyprland ---
+  # If we find "hyprland.conf", we should link it to $DEST_DIR/hypr/hyprland.conf
+  if [ "$config_name" == "hyprland.conf" ]; then
+    echo "Found hyprland.conf, handling specially..."
+    HYPR_DIR="$DEST_DIR/hypr"
+    dest_path="$HYPR_DIR/hyprland.conf"
+    
+    if [ ! -d "$HYPR_DIR" ]; then
+      echo "Creating $HYPR_DIR directory..."
+      mkdir -p "$HYPR_DIR"
+    fi
+  fi
   
   # Check if a file, directory, or symlink already exists at the destination
   if [ -e "$dest_path" ] || [ -L "$dest_path" ]; then
     echo "WARNING: $dest_path already exists. Skipping."
   else
-    echo "Linking $config_name -> $dest_path"
+    echo "Linking $config_path -> $dest_path"
     # Create the symbolic link
-    ln -s "$dir_path" "$dest_path"
+    ln -s "$config_path" "$dest_path"
   fi
 done
 

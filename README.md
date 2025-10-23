@@ -1,3 +1,13 @@
+# Prerequisites
+1. Please make sure these packages are installed:
+- fastfetch
+- hyprland
+- hyprpaper
+- kitty
+- nvim
+- ohmyposh
+- rofi
+
 # Instructions
 1. Clone this repository *with git submodules* into your user home directory.
     - `git clone --recurse-submodules`
