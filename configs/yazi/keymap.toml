@@ -1,0 +1,9 @@
+[[mgr.prepend_keymap]]
+# Press 'b' to open file in browser
+on = [ "b" ]
+run = 'shell --confirm "xdg-open \"$1\""'
+desc = "Open in browser"
+
+[[mgr.prepend_keymap]]
+on  = "<C-n>"
+run = 'shell -- dragon -x -i -T "$0"'

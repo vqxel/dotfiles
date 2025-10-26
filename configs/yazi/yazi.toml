@@ -1,0 +1,50 @@
+[opener]
+# Default editor (nvim)
+edit = [
+  { run = 'nvim "$@"', block = true, for = "unix" },
+]
+# PDF viewer (chrome)
+pdf = [
+  { run = 'google-chrome "$@"', orphan = true, for = "unix" },
+]
+# Image viewer
+image = [
+  { run = 'xdg-open "$@"', orphan = true, for = "unix" },
+]
+# Video player
+video = [
+  { run = 'xdg-open "$@"', orphan = true, for = "unix" },
+]
+# Browser opener (for HTML files and web content)
+browser = [
+  { run = 'google-chrome "$@"', orphan = true, for = "unix", desc = "Open in browser" },
+]
+
+[open]
+# Use nvim for text files by default
+rules = [
+  # PDFs open with Chrome
+  { mime = "application/pdf", use = "pdf" },
+  
+  # HTML files can open in browser (press 'b' key) or nvim (press Enter)
+  { mime = "text/html", use = "edit" },
+  
+  # Text files and code files open with nvim
+  { mime = "text/*", use = "edit" },
+  { mime = "application/json", use = "edit" },
+  { mime = "application/x-yaml", use = "edit" },
+  { mime = "application/xml", use = "edit" },
+  { mime = "inode/x-empty", use = "edit" },
+  
+  # Images
+  { mime = "image/*", use = "image" },
+  
+  # Videos
+  { mime = "video/*", use = "video" },
+]
+
+[mgr]
+# Enable mouse support for dragging
+mouse_events = [ "click", "scroll" ]
+show_hidden = true
+

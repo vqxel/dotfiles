@@ -1,5 +1,7 @@
 fastfetch -c ~/.config/fastfetch/minimal.jsonc
 
+eval "$(oh-my-posh init bash --config ~/.config/ohmyposh/custom.omp.json)"
+
 alias vim="nvim"
 
 alias ls='eza -a --icons=always'
@@ -10,7 +12,8 @@ alias shutdown='systemctl poweroff'
 alias desktop='cd /usr/share/applications'
 alias sdesktop='cd ~/.local/share/applications'
 
-eval "$(oh-my-posh init bash --config ~/.config/ohmyposh/custom.omp.json)"
+
+export PATH="$HOME/.local/bin:$PATH"
 
 # --- Terminal CWD Tracking for Hyprland ---
 
