@@ -7,6 +7,7 @@
 - nvim
 - ohmyposh
 - rofi
+- SDDM
 
 # Instructions
 1. Clone this repository *with git submodules* into your user home directory.

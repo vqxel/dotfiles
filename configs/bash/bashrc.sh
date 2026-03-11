@@ -83,7 +83,7 @@ case "$(uname -s)" in
                 # Use flock for safe concurrent writes from multiple terminals
                 flock "$TERMINAL_CWD_DB.lock" bash -c '
                     jq --arg addr "$MY_HYPR_WINDOW_ADDR" --arg cwd "$PWD" \
-                       ". + {($addr): $cwd}" "$TERMINAL_CWD_DB" > "$TERMINAL_CWD_DB.tmp"
+                       ". + {(\$addr): \$cwd}" "$TERMINAL_CWD_DB" > "$TERMINAL_CWD_DB.tmp"
                     mv "$TERMINAL_CWD_DB.tmp" "$TERMINAL_CWD_DB"
                 '
             }
@@ -95,7 +95,7 @@ case "$(uname -s)" in
                 fi
 
                 flock "$TERMINAL_CWD_DB.lock" bash -c '
-                    jq "del(.\"$MY_HYPR_WINDOW_ADDR\")" "$TERMINAL_CWD_DB" > "$TERMINAL_CWD_DB.tmp_del"
+                    jq --arg addr "$MY_HYPR_WINDOW_ADDR" "del(.[\$addr])" "$TERMINAL_CWD_DB" > "$TERMINAL_CWD_DB.tmp_del"
                     mv "$TERMINAL_CWD_DB.tmp_del" "$TERMINAL_CWD_DB"
                 '
 
@@ -126,24 +126,26 @@ case "$(uname -s)" in
         ;;
 esac
 
-# --- Custom Keybind for Cmd+Enter ---
+# --- Custom Keybind for Cmd+Enter (Zsh Only) ---
 
-# 1. Define the function (widget) you want to run.
-#    This example just runs the command (like pressing Enter)
-#    You could change "accept-line" to any other command.
-run-cmd-enter-widget() {
-  zle accept-line  # This simulates pressing Enter
-  print "YOU PRESSED"
-  
-  # Example: To clear the buffer and then run:
-  # zle -I # (In-place) clear buffer
-  # print "You pressed Cmd+Enter!"
-  # zle accept-line
-}
+if [ -n "$ZSH_VERSION" ]; then
+  # 1. Define the function (widget) you want to run.
+  #    This example just runs the command (like pressing Enter)
+  #    You could change "accept-line" to any other command.
+  run-cmd-enter-widget() {
+    zle accept-line  # This simulates pressing Enter
+    print "YOU PRESSED"
+    
+    # Example: To clear the buffer and then run:
+    # zle -I # (In-place) clear buffer
+    # print "You pressed Cmd+Enter!"
+    # zle accept-line
+  }
 
-# 2. Create the new widget in the Zsh Line Editor (ZLE)
-zle -N run-cmd-enter-widget
+  # 2. Create the new widget in the Zsh Line Editor (ZLE)
+  zle -N run-cmd-enter-widget
 
-# 3. Bind your custom escape sequence to the new widget
-#    Note: \e is the same as ^[
-bindkey '\e[13;9u' run-cmd-enter-widget
+  # 3. Bind your custom escape sequence to the new widget
+  #    Note: \e is the same as ^[
+  bindkey '\e[13;9u' run-cmd-enter-widget
+fi
