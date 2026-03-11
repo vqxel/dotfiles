@@ -2,6 +2,7 @@
 
 # Set preferred editor
 alias vim="nvim"
+alias svim="sudoedit"
 
 alias ls='eza -a --icons=always'
 alias ll='eza -al --icons=always'
@@ -14,6 +15,8 @@ alias sdesktop='cd ~/.local/share/applications'
 alias lhc='kitty +kitten ssh rbagheri@uceftrk01.ps.uci.edu'
 alias lhcfs='sshfs rbagheri@uceftrk01.ps.uci.edu: ~/mntlhc'
 alias ulhcfs='fusermount -u ~/mntlhc'
+
+export SUDO_EDITOR="nvim"
 
 export PATH="$HOME/.local/bin:$PATH"
 
