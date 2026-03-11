@@ -1,0 +1,22 @@
+/* Import pywal colors */
+@import url("file:///home/rezq/.cache/wal/colors-waybar.css");
+
+window#osd {
+    background: alpha(@background, 0.8);
+    border-radius: 16px;
+    border: 2px solid @color4;
+}
+
+progress {
+    background: @color4;
+    border-radius: 999px;
+}
+
+trough {
+    background: alpha(@color0, 0.5);
+    border-radius: 999px;
+}
+
+image#osd-icon {
+    color: @color4;
+}
