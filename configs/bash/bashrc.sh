@@ -3,7 +3,18 @@
 # Set preferred editor
 alias vim="nvim"
 
-# Add local binaries to PATH
+alias ls='eza -a --icons=always'
+alias ll='eza -al --icons=always'
+alias lt='eza -a --tree --level=1 --icons=always'
+alias shutdown='systemctl poweroff'
+
+alias desktop='cd /usr/share/applications'
+alias sdesktop='cd ~/.local/share/applications'
+
+alias lhc='kitty +kitten ssh rbagheri@uceftrk01.ps.uci.edu'
+alias lhcfs='sshfs rbagheri@uceftrk01.ps.uci.edu: ~/mntlhc'
+alias ulhcfs='fusermount -u ~/mntlhc'
+
 export PATH="$HOME/.local/bin:$PATH"
 
 # --- 2. Shell Prompt & Fetch (All Systems) ---

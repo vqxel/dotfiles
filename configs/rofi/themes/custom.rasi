@@ -1,91 +1,135 @@
 /*
- * ROFI color theme
- *
- * Based on Something Found in the Internet
- *
- * User: Contributors
- * Copyright: *!
+ * ROFI Canvas Theme
+ * A floating, modular layout with separated components.
+ * Fixed clipping issue by targeting border-radius specifically
+ * and adding margin buffer for the border stroke.
  */
-
- // Inspired by Tokyonight theme from https://github.com/Murzchnvok/rofi-collection/blob/master/tokyonight/tokyonight.rasi
 
 configuration {
   font: "Cascadia Code 10";
-
-  drun {
-    display-name: "";
-  }
-
-  run {
-    display-name: "";
-  }
-
-  window {
-    display-name: "";
-  }
-
-  timeout {
-    delay: 10;
-    action: "kb-cancel";
-  }
+  show-icons: true;
+  icon-theme: "Papirus";
+  display-drun: "";
+  display-run: "";
+  display-window: "";
+  drun-display-format: "{name}";
+  window-format: "{w} · {c} · {t}";
 }
 
+/* Import Pywal colors */
+@import "~/.cache/wal/colors-rofi-dark"
+
 * {
-  border: 0;
-  margin: 0;
-  padding: 0;
-  spacing: 0;
-
-  bg: #1a1b26;
-  bg-alt: #232433;
-  fg: #6a6f87;
-  fg-alt: #a9b1d6;
-
-  background-color: @bg;
-  text-color: @fg;
+  /* Colors mapped from Pywal */
+  bg:          @background;
+  bg-alt:      @normal-background;
+  bg-selected: @selected-normal-background;
+  fg:          @foreground;
+  fg-alt:      @selected-normal-foreground;
+  border-col:  @selected-normal-background; /* Uses the pywal accent color for the canvas borders */
+  
+  /* Constraints */
+  margin:      0;
+  padding:     0;
+  spacing:     0;
+  /* Removed global border-radius to prevent window-level clipping */
 }
 
 window {
-  transparency: "real";
-  width: 700px;
+  width:            600px;
+  transparency:     "real";
+  background-color: transparent; 
+  cursor:           "default";
+  padding:          0px;
+  border:           0px;
 }
 
 mainbox {
-  children: [inputbar, listview];
+  enabled:          true;
+  spacing:          15px;      /* This creates the vertical gap */
+  padding:          20px;      /* Shifted safe-zone padding back to mainbox */
+  background-color: transparent;
+  children:         [ "inputbar", "listview" ];
 }
 
+/* --- THE SEARCH BAR (Top Canvas) --- */
 inputbar {
+  enabled:          true;
+  spacing:          10px;
+  padding:          10px;
+  border:           2px;
+  border-color:     @border-col;
+  border-radius:    12px;      /* Applied radius specifically here */
   background-color: @bg-alt;
-  children: [prompt, entry];
-}
-
-entry {
-  background-color: inherit;
-  padding: 12px 3px;
+  text-color:       @fg;
+  children:         [ "prompt", "entry" ];
 }
 
 prompt {
+  enabled:          true;
   background-color: inherit;
-  padding: 12px;
+  text-color:       @fg-alt;
+  padding: 0px 3px 0px 0px;
 }
 
+entry {
+  enabled:          true;
+  background-color: inherit;
+  text-color:       inherit;
+  cursor:           text;
+  placeholder:      "Search...";
+  placeholder-color: inherit;
+}
+
+/* --- THE APP LIST (Bottom Canvas) --- */
 listview {
-  lines: 8;
+  enabled:          true;
+  margin:           2px;       /* Breathing room so the outer stroke isn't clipped */
+  columns:          1;
+  lines:            8;
+  cycle:            true;
+  dynamic:          true;
+  scrollbar:        false;
+  layout:           vertical;
+  reverse:          false;
+  fixed-height:     true;
+  fixed-columns:    true;
+  
+  spacing:          5px;
+  padding:          10px;
+  border:           2px;
+  border-color:     @border-col;
+  border-radius:    12px;      /* Applied radius specifically here */
+  background-color: @bg;
 }
 
+/* --- ELEMENTS --- */
 element {
-  children: [element-icon, element-text];
+  enabled:          true;
+  spacing:          10px;
+  padding:          8px;
+  border-radius:    8px;
+  background-color: transparent;
+  text-color:       @fg;
+  cursor:           pointer;
+}
+
+element selected {
+  background-color: @bg-selected;
+  text-color:       @fg-alt;
 }
 
 element-icon {
-  padding: 10px 10px;
-  size: 20px;
+  size:             24px;
+  cursor:           inherit;
+  background-color: transparent;
+  text-color:       inherit;
 }
 
 element-text {
-  padding: 10px 0;
-}
-
-element-text selected {
-  text-color: @fg-alt;
+  vertical-align:   0.5;
+  horizontal-align: 0.0;
+  cursor:           inherit;
+  background-color: transparent;
+  text-color:       inherit;
 }

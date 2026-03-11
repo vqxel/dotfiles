@@ -1,0 +1,33 @@
+#############
+### INPUT ###
+#############
+
+# https://wiki.hypr.land/Configuring/Variables/#input
+input {
+    kb_layout = us
+    kb_variant =
+    kb_model =
+    kb_rules =
+
+    kb_options = caps:escape 
+
+  follow_mouse = 1
+
+    sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
+
+    touchpad {
+        natural_scroll = true
+        clickfinger_behavior = 1
+        scroll_factor = 0.1
+    }
+}
+
+# https://wiki.hypr.land/Configuring/Variables/#gestures
+gestures {
+#    workspace_swipe = true 
+    gesture = 3, horizontal, workspace
+    workspace_swipe_use_r = true
+
+    gesture = 3, up, dispatcher, workspace, special
+    gesture = 3, down, dispatcher, exec, $REZQ_SCRIPTS/workspaces/close-special-wkspc.sh 
+}

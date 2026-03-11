@@ -5,6 +5,34 @@ set -e
 # Get the absolute path to the directory where this script is located
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
+# --- Hostname Setup ---
+if command -v hostnamectl &> /dev/null; then
+  echo "---"
+  echo "Checking system hostname..."
+  
+  # Try to get the static hostname
+  CURRENT_HOSTNAME=$(hostnamectl --static 2>/dev/null || true)
+  
+  if [ -n "$CURRENT_HOSTNAME" ] && [ "$CURRENT_HOSTNAME" != "localhost" ] && [ "$CURRENT_HOSTNAME" != "n/a" ]; then
+    echo "preset static hostname: $CURRENT_HOSTNAME"
+  else
+    echo "No preset static hostname found."
+    read -p "What would you like to set the system hostname to? (leave blank to skip): " NEW_HOSTNAME
+    if [ -z "$NEW_HOSTNAME" ]; then
+      echo "WARNING: No static hostname set. Google Chrome might have issues with the singleton lock."
+    else
+      echo "Setting static hostname to: $NEW_HOSTNAME"
+      # Attempt to set the hostname, use sudo if available
+      if command -v sudo &> /dev/null; then
+        sudo hostnamectl set-hostname "$NEW_HOSTNAME"
+      else
+        hostnamectl set-hostname "$NEW_HOSTNAME"
+      fi
+    fi
+  fi
+fi
+
+echo "---"
 # Set the source directory for your configs
 SOURCE_DIR="$SCRIPT_DIR/configs"
 
