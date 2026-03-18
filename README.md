@@ -6,8 +6,6 @@ sudo dnf copr enable
 - erikreider/swayosd 
 - elxreno/jetbrains-mono-fonts
 - maveonair/jetbrains-mono-nerd-fonts
-- sudo dnf install fedora-workstation-repositories
-- sudo dnf config-manager setopt google-chrome.enabled=1
 2. Please make sure these packages are installed:
 - fastfetch
 - hyprland
