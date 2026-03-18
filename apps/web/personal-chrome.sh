@@ -1,3 +1,3 @@
 #!/bin/bash
 
-google-chrome --new-window --profile-directory="Profile 1"
+chromium-browser --new-window --profile-directory="Profile 1"

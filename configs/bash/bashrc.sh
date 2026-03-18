@@ -16,6 +16,8 @@ alias lhc='kitty +kitten ssh rbagheri@uceftrk01.ps.uci.edu'
 alias lhcfs='sshfs rbagheri@uceftrk01.ps.uci.edu: ~/mntlhc'
 alias ulhcfs='fusermount -u ~/mntlhc'
 
+alias logout='hyprctl dispatch exit'
+
 export SUDO_EDITOR="nvim"
 
 export PATH="$HOME/.local/bin:$PATH"
