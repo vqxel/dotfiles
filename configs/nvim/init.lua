@@ -29,8 +29,24 @@ vim.diagnostic.config({
     }
 })
 
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, {
-    desc = 'Show line diagnostics (LSP)',
+local diagnostic_float_win = nil
+
+local function toggle_diagnostic_float()
+    if diagnostic_float_win and vim.api.nvim_win_is_valid(diagnostic_float_win) then
+        vim.api.nvim_win_close(diagnostic_float_win, true)
+        diagnostic_float_win = nil
+        return
+    end
+
+    local _, win = vim.diagnostic.open_float(nil, {
+        focusable = false,
+    })
+
+    diagnostic_float_win = win
+end
+
+vim.keymap.set('n', '<C-Space>', toggle_diagnostic_float, {
+    desc = 'Toggle line diagnostics (LSP)',
     silent = true
 })
 

@@ -17,8 +17,10 @@ alias lhcfs='sshfs rbagheri@uceftrk01.ps.uci.edu: ~/mntlhc'
 alias ulhcfs='fusermount -u ~/mntlhc'
 
 export SUDO_EDITOR="nvim"
+export EDITOR="nvim"
 
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="/home/rezq/.npm-global/bin:$PATH"
 
 # --- 2. Shell Prompt & Fetch (All Systems) ---
 # These are run before system-specifics as they might set PROMPT_COMMAND
