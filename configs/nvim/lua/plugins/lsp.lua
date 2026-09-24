@@ -1,3 +1,39 @@
+local capabilities = require("blink.cmp").get_lsp_capabilities()
+
+vim.lsp.config("basedpyright", {
+  capabilities = capabilities,
+  settings = {
+    basedpyright = {
+      analysis = {
+        typeCheckingMode = "standard",
+        diagnosticSeverityOverrides = {
+--          reportAny = "none",
+        },
+      },
+    },
+  },
+})
+
+vim.lsp.config("matlab_ls", {
+  capabilities = capabilities,
+
+  settings = {
+    MATLAB = {
+      indexWorkspace = true,
+      installPath = "/home/rezq/MATLAB/R2026b/",
+      matlabConnectionTiming = "onStart",
+      telemetry = false,
+    },
+  },
+})
+
+vim.lsp.config("ruff", {
+  capabilities = capabilities,
+})
+
+vim.lsp.config("tinymist", {})
+vim.lsp.enable("tinymist")
+
 return {
   {
     "neovim/nvim-lspconfig",

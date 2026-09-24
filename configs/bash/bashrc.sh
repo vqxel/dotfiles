@@ -7,6 +7,7 @@ alias svim="sudoedit"
 alias ls='eza -a --icons=always'
 alias ll='eza -al --icons=always'
 alias lt='eza -a --tree --level=1 --icons=always'
+alias gls='git ls-files'
 alias shutdown='systemctl poweroff'
 
 alias desktop='cd /usr/share/applications'
@@ -154,3 +155,7 @@ if [ -n "$ZSH_VERSION" ]; then
   #    Note: \e is the same as ^[
   bindkey '\e[13;9u' run-cmd-enter-widget
 fi
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"
