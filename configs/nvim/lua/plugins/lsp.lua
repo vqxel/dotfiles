@@ -1,5 +1,7 @@
 local capabilities = require("blink.cmp").get_lsp_capabilities()
 
+require("plugins.matlabrun")
+
 vim.lsp.config("basedpyright", {
   capabilities = capabilities,
   settings = {
