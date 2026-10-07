@@ -23,6 +23,11 @@ export EDITOR="nvim"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="/home/rezq/.npm-global/bin:$PATH"
 
+# Disable Ctrl + S being intercepted as XOFF flow control in interactive terminals.
+if [[ $- == *i* && -r /dev/tty ]]; then
+    stty -ixon </dev/tty 2>/dev/null
+fi
+
 # --- 2. Shell Prompt & Fetch (All Systems) ---
 # These are run before system-specifics as they might set PROMPT_COMMAND
 

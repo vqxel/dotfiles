@@ -116,3 +116,19 @@ tooltip {
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
+
+/* Special workspaces: only populated buttons are shown. */
+#custom-special-a, #custom-special-z, #custom-special-x {
+    padding: 0px 5px;
+    border-radius: 3px;
+    transition: all .2s ease;
+}
+#custom-special-a { color: #a6d189; }
+#custom-special-z { color: #ff5555; }
+#custom-special-x { color: #8caaee; }
+#custom-special-a.visible { background: alpha(#a6d189, .2); }
+#custom-special-z.visible { background: alpha(#ff5555, .2); }
+#custom-special-x.visible { background: alpha(#8caaee, .2); }
+#custom-special-a:hover, #custom-special-z:hover, #custom-special-x:hover {
+    background: alpha(@color7, .15);
+}
